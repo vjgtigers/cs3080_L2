@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
         int randomNum = 0;
         for(int i = 0; i < numItems; ++i) {
             randomNum = rand() % range;
-            cout << randomNum << endl;
+            cout << randomNum << " " << i << endl;
         }
 
 
