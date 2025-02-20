@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
         int randomNum = 0;
         for(int i = 0; i < numItems; ++i) {
             randomNum = rand() % range;
-            cout << randomNum << " " << i << endl;
+            //cout << randomNum << " " << i << endl;
             write(pipeVar[1], &randomNum, sizeof(randomNum));
         }
 
@@ -60,13 +60,13 @@ int main(int argc, char *argv[])
         vector<int> numbers; //easiest way to perform stat calculations at the end
         for(int i = 0; i < numItems; ++i) {
             read(pipeVar[0], &fetchedNum, sizeof(fetchedNum));
-            cout << "read side: " << fetchedNum << endl;
+            cout << fetchedNum << endl;
             numbers.push_back(fetchedNum);
         }
 
 
 
-        cout << "Child ID: (" << getpid() << ") number of items received: " << numItems<<", min: " << *min_element(numbers.begin(), numbers.end()) << ", max: " << *max_element(numbers.begin(), numbers.end()) << ", avg :" << (accumulate(numbers.begin(), numbers.end(), 0.0) / numbers.size()) << endl;
+        cout << "Child ID: (" << getpid() << ") number of items received: " << numItems<<", min: " << *min_element(numbers.begin(), numbers.end()) << ", max: " << *max_element(numbers.begin(), numbers.end()) << ", avg: " << (accumulate(numbers.begin(), numbers.end(), 0.0) / numbers.size()) << endl;
         close(pipeVar[0]);
 
 
