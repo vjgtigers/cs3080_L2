@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <numeric>
 #include <vector>
+#include <sys/wait.h>
 
 using namespace std;
 
@@ -49,6 +50,7 @@ int main(int argc, char *argv[])
             write(pipeVar[1], &randomNum, sizeof(randomNum));
         }
 
+        wait(NULL);
         cout << "Parent ID: (" << getpid() << ") number of items written into the pipes are: " << numItems << endl;
         close(pipeVar[1]);
 
@@ -62,7 +64,9 @@ int main(int argc, char *argv[])
         for(int i = 0; i < numItems; ++i) {
             read(pipeVar[0], &fetchedNum, sizeof(fetchedNum));
             //cout << fetchedNum << endl;
-            numbers.push_back(fetchedNum);
+            numbers.push_back(fetchedNum);//could also have specific variables for min/max/sum/count
+            //but the numbers could be needed later in the program so I chose to store them in a vector
+            //until the end where all the statistics are only calculated once
         }
 
 
