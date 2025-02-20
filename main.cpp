@@ -1,7 +1,9 @@
+#include <algorithm>
 #include <iostream>
 #include <unistd.h>
 #include <sys/types.h>
 #include <cstdlib>
+#include <numeric>
 #include <vector>
 
 using namespace std;
@@ -47,7 +49,7 @@ int main(int argc, char *argv[])
             write(pipeVar[1], &randomNum, sizeof(randomNum));
         }
 
-        cout << "Child ID: (" << getpid() << ") number of items written into the pipes are: " << numItems << endl;
+        cout << "Parent ID: (" << getpid() << ") number of items written into the pipes are: " << numItems << endl;
         close(pipeVar[1]);
 
     }
@@ -64,7 +66,7 @@ int main(int argc, char *argv[])
 
 
 
-
+        cout << "Child ID: (" << getpid() << ") number of items received: " << numItems<<", min: " << *min_element(numbers.begin(), numbers.end()) << ", max: " << *max_element(numbers.begin(), numbers.end()) << ", avg :" << (accumulate(numbers.begin(), numbers.end(), 0.0) / numbers.size()) << endl;
         close(pipeVar[0]);
 
 
