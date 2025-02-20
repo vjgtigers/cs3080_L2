@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
         }
 
         wait(NULL);
-        cout << "Parent ID: (" << getpid(void) << ") number of items written into the pipes are: " << numItems << endl;
+        cout << "Parent ID: (" << getpid() << ") number of items written into the pipes are: " << numItems << endl;
         close(pipeVar[1]);
 
         return 0; //explicit exit for parent
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 
 
 
-        cout << "Child ID: (" << getpid(void) << ") number of items received: " << numItems<<", min: " << *min_element(numbers.begin(), numbers.end()) << ", max: " << *max_element(numbers.begin(), numbers.end()) << ", avg: " << (accumulate(numbers.begin(), numbers.end(), 0.0) / numbers.size()) << endl;
+        cout << "Child ID: (" << getpid() << ") number of items received: " << numItems<<", min: " << *min_element(numbers.begin(), numbers.end()) << ", max: " << *max_element(numbers.begin(), numbers.end()) << ", avg: " << (accumulate(numbers.begin(), numbers.end(), 0.0) / numbers.size()) << endl;
         close(pipeVar[0]);
 
     return 0; //explicit exit for child
