@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
         for(int i = 0; i < numItems; ++i) {
             randomNum = rand() % range;
             cout << randomNum << " " << i << endl;
+            write(pipeVar[1], &randomNum, sizeof(randomNum));
         }
 
 
@@ -52,7 +53,11 @@ int main(int argc, char *argv[])
 
     else if (pid == 0) { //child process
         close(pipeVar[1]); //close write end of pipe
-
+        int fetchedNum;
+        for(int i = 0; i < numItems; ++i) {
+            read(pipeVar[0], &fetchedNum, sizeof(fetchedNum));
+            cout << "read side: " << fetchedNum << endl;
+        }
 
 
 
