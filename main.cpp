@@ -52,6 +52,7 @@ int main(int argc, char *argv[])
         cout << "Parent ID: (" << getpid() << ") number of items written into the pipes are: " << numItems << endl;
         close(pipeVar[1]);
 
+        return 0; //explicit exit for parent
     }
 
     else if (pid == 0) { //child process
@@ -60,7 +61,7 @@ int main(int argc, char *argv[])
         vector<int> numbers; //easiest way to perform stat calculations at the end
         for(int i = 0; i < numItems; ++i) {
             read(pipeVar[0], &fetchedNum, sizeof(fetchedNum));
-            cout << fetchedNum << endl;
+            //cout << fetchedNum << endl;
             numbers.push_back(fetchedNum);
         }
 
@@ -69,7 +70,7 @@ int main(int argc, char *argv[])
         cout << "Child ID: (" << getpid() << ") number of items received: " << numItems<<", min: " << *min_element(numbers.begin(), numbers.end()) << ", max: " << *max_element(numbers.begin(), numbers.end()) << ", avg: " << (accumulate(numbers.begin(), numbers.end(), 0.0) / numbers.size()) << endl;
         close(pipeVar[0]);
 
-
+    return 0; //explicit exit for child
     }
 
 
