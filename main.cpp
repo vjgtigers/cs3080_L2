@@ -1,3 +1,9 @@
+//Author: Vaughn Gugger
+//Date: Feb 20, 2025
+//Class: CS3080 Spring
+
+
+
 #include <algorithm>
 #include <iostream>
 #include <unistd.h>
