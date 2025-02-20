@@ -11,7 +11,6 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    std::cout << "Hello, World!" << std::endl;
     if(argc < 4) {
         cout << "not enough arguments provided" << endl;
         exit(-1);
@@ -24,7 +23,7 @@ int main(int argc, char *argv[])
     int range = atoi(rangeString);
     int seed = atoi(seedString);
 
-    cout << "inputed values as ints: " << numItems << " " << range << " " << seed << endl;
+    //cout << "inputed values as ints: " << numItems << " " << range << " " << seed << endl;
 
     int pipeVar[2];
     pid_t pid;
