@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <cstdlib>
+#include <vector>
 
 using namespace std;
 
@@ -46,7 +47,7 @@ int main(int argc, char *argv[])
             write(pipeVar[1], &randomNum, sizeof(randomNum));
         }
 
-
+        cout << "Child ID: (" << getpid() << ") number of items written into the pipes are: " << numItems << endl;
         close(pipeVar[1]);
 
     }
@@ -54,9 +55,11 @@ int main(int argc, char *argv[])
     else if (pid == 0) { //child process
         close(pipeVar[1]); //close write end of pipe
         int fetchedNum;
+        vector<int> numbers; //easiest way to perform stat calculations at the end
         for(int i = 0; i < numItems; ++i) {
             read(pipeVar[0], &fetchedNum, sizeof(fetchedNum));
             cout << "read side: " << fetchedNum << endl;
+            numbers.push_back(fetchedNum);
         }
 
 
